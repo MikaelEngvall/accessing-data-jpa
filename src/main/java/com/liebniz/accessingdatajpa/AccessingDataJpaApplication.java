@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @SpringBootApplication
 public class AccessingDataJpaApplication {
@@ -25,10 +24,10 @@ public class AccessingDataJpaApplication {
         return (args) -> {
             // Save a few customers
             Customer jack = repository.save(new Customer("Jack", "Bauer"));
-            Customer chloe = repository.save(new Customer("Chloe", "O'Brian"));
-            Customer kim = repository.save(new Customer("Kim", "Bauer"));
-            Customer david = repository.save(new Customer("David", "Palmer"));
-            Customer michelle = repository.save(new Customer("Michelle", "Dessler"));
+            repository.save(new Customer("Chloe", "O'Brian"));
+            repository.save(new Customer("Kim", "Bauer"));
+            repository.save(new Customer("David", "Palmer"));
+            repository.save(new Customer("Michelle", "Dessler"));
             // Fetch all customers
             log.info("Customers found with findAll():");
             log.info("-------------------------------");
@@ -53,9 +52,7 @@ public class AccessingDataJpaApplication {
             log.info("Customers found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
             repository.findByLastName("Bauer")
-                    .forEach(bauer -> {
-                        log.info(bauer.toString());
-                    });
+                    .forEach(bauer -> log.info(bauer.toString()));
 
             log.info("");
         };
